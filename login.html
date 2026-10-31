@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SubFlow - Access Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 10%, rgba(124, 58, 237, 0.12), transparent 45%), var(--bg-app);
+      padding: 20px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 460px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      padding: 36px 32px;
+      position: relative;
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .auth-logo {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 26px;
+      font-weight: 800;
+      box-shadow: 0 8px 16px rgba(124, 58, 237, 0.25);
+    }
+
+    .auth-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .auth-subtitle {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .auth-tabs {
+      display: flex;
+      background-color: var(--bg-subtle);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+    }
+
+    .auth-tab-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .auth-tab-btn.active {
+      background-color: var(--bg-surface);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .auth-view {
+      display: none;
+    }
+
+    .auth-view.active {
+      display: block;
+    }
+
+    .demo-role-box {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .demo-role-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+      color: var(--text-subtle);
+      margin-bottom: 12px;
+    }
+
+    .demo-role-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-logo">S</div>
+      <h1 class="auth-title">SubFlow</h1>
+      <p class="auth-subtitle">Subscription & Revenue Management System</p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab-btn active" onclick="switchAuthTab('login')">Sign In</button>
+      <button class="auth-tab-btn" onclick="switchAuthTab('register')">Register</button>
+      <button class="auth-tab-btn" onclick="switchAuthTab('forgot')">Reset Password</button>
+    </div>
+
+    <!-- 1. LOGIN TAB -->
+    <div id="loginView" class="auth-view active">
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="admin@subflow.io" required value="admin@subflow.io">
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <label class="form-label" for="loginPassword" style="margin-bottom: 0;">Password</label>
+            <a href="javascript:void(0)" onclick="switchAuthTab('forgot')" style="font-size: 12px;">Forgot password?</a>
+          </div>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••••••" required value="Admin@2026!">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+          <span>Sign In to Dashboard</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- 2. REGISTER TAB -->
+    <div id="registerView" class="auth-view">
+      <form id="registerForm" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label class="form-label" for="regName">Organization or Account Name <span class="required-star">*</span></label>
+          <input type="text" id="regName" class="form-input" placeholder="Apex Cloud Technologies" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Email Address <span class="required-star">*</span></label>
+          <input type="email" id="regEmail" class="form-input" placeholder="billing@apexcloud.io" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regRole">Account Role</label>
+          <select id="regRole" class="form-select">
+            <option value="CUSTOMER">Customer (Self-service portal)</option>
+            <option value="STAFF">Staff (Operations - requires admin)</option>
+          </select>
+          <span class="form-hint">Note: Staff creation requires Admin privileges.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regPassword">Password <span class="required-star">*</span></label>
+          <input type="password" id="regPassword" class="form-input" placeholder="Create strong password" required oninput="validatePasswordPolicy(this.value)">
+          
+          <!-- Strict password policy indicator -->
+          <div class="password-policy-list">
+            <div id="ruleLength" class="policy-item">
+              <span class="policy-icon">•</span> Over 8 characters
+            </div>
+            <div id="ruleUpper" class="policy-item">
+              <span class="policy-icon">•</span> At least 1 uppercase letter (A-Z)
+            </div>
+            <div id="ruleLower" class="policy-item">
+              <span class="policy-icon">•</span> At least 1 lowercase letter (a-z)
+            </div>
+            <div id="ruleSpecial" class="policy-item">
+              <span class="policy-icon">•</span> At least 1 special character (!@#$%^&*)
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" id="btnRegisterSubmit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+          Create New Account
+        </button>
+      </form>
+    </div>
+
+    <!-- 3. FORGOT PASSWORD TAB -->
+    <div id="forgotView" class="auth-view">
+      <form id="forgotForm" onsubmit="handleForgotPassword(event)">
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px;">
+          Enter your registered email address and we will dispatch a secure password reset link placeholder.
+        </p>
+
+        <div class="form-group">
+          <label class="form-label" for="resetEmail">Registered Email</label>
+          <input type="email" id="resetEmail" class="form-input" placeholder="name@company.com" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+          Send Reset Link
+        </button>
+
+        <button type="button" class="btn btn-outline" style="width: 100%; margin-top: 10px;" onclick="switchAuthTab('login')">
+          Return to Sign In
+        </button>
+      </form>
+    </div>
+
+    <!-- HACKATHON EVALUATION QUICK ACCESS -->
+    <div class="demo-role-box">
+      <div class="demo-role-title">Instant Hackathon Demo Login</div>
+      <div class="demo-role-buttons">
+        <button type="button" class="btn btn-sm btn-outline-primary" onclick="quickLoginAs('ADMIN')">
+          Admin
+        </button>
+        <button type="button" class="btn btn-sm btn-secondary" onclick="quickLoginAs('STAFF')">
+          Staff
+        </button>
+        <button type="button" class="btn btn-sm btn-outline" onclick="quickLoginAs('CUSTOMER')">
+          Customer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script>
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <span style="font-weight: 600;">${type === 'success' ? '✓' : 'ℹ'}</span>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function switchAuthTab(tab) {
+      document.querySelectorAll('.auth-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.auth-view').forEach(v => v.classList.remove('active'));
+
+      if (tab === 'login') {
+        document.querySelector('.auth-tab-btn:nth-child(1)').classList.add('active');
+        document.getElementById('loginView').classList.add('active');
+      } else if (tab === 'register') {
+        document.querySelector('.auth-tab-btn:nth-child(2)').classList.add('active');
+        document.getElementById('registerView').classList.add('active');
+      } else if (tab === 'forgot') {
+        document.querySelector('.auth-tab-btn:nth-child(3)').classList.add('active');
+        document.getElementById('forgotView').classList.add('active');
+      }
+    }
+
+    function validatePasswordPolicy(pw) {
+      const hasLength = pw.length > 8;
+      const hasUpper = /[A-Z]/.test(pw);
+      const hasLower = /[a-z]/.test(pw);
+      const hasSpecial = /[^A-Za-z0-9]/.test(pw);
+
+      updatePolicyRule('ruleLength', hasLength);
+      updatePolicyRule('ruleUpper', hasUpper);
+      updatePolicyRule('ruleLower', hasLower);
+      updatePolicyRule('ruleSpecial', hasSpecial);
+
+      return hasLength && hasUpper && hasLower && hasSpecial;
+    }
+
+    function updatePolicyRule(elementId, isValid) {
+      const el = document.getElementById(elementId);
+      if (isValid) {
+        el.classList.add('met');
+        el.querySelector('.policy-icon').textContent = '✓';
+      } else {
+        el.classList.remove('met');
+        el.querySelector('.policy-icon').textContent = '•';
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const pw = document.getElementById('loginPassword').value;
+
+      if (!email || !pw) {
+        showToast('Please enter both email and password.', 'error');
+        return;
+      }
+
+      // Check role assignment based on email or default to Admin
+      let role = 'ADMIN';
+      let customerId = null;
+      let userName = 'System Administrator';
+
+      if (email.includes('staff')) {
+        role = 'STAFF';
+        userName = 'Operations Staff';
+      } else if (email.includes('customer') || email.includes('cloudscale')) {
+        role = 'CUSTOMER';
+        userName = 'CloudScale Enterprise';
+        customerId = 'CUST-001';
+      }
+
+      Store.setCurrentUser({
+        id: 'USR-' + String(Date.now()).slice(-3),
+        name: userName,
+        email: email,
+        role: role,
+        customerId: customerId
+      });
+
+      showToast(`Welcome back, ${userName}! Redirecting to dashboard...`, 'success');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 900);
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const role = document.getElementById('regRole').value;
+      const pw = document.getElementById('regPassword').value;
+
+      if (!validatePasswordPolicy(pw)) {
+        showToast('Password does not satisfy all security policy requirements.', 'error');
+        return;
+      }
+
+      if (role === 'STAFF') {
+        const currentUser = Store.getCurrentUser();
+        if (currentUser.role !== 'ADMIN') {
+          showToast('Security Alert: Only Administrator accounts can create Staff users.', 'error');
+          return;
+        }
+      }
+
+      // Create new customer record if customer role
+      let newCustomerId = null;
+      if (role === 'CUSTOMER') {
+        const newCust = Store.saveCustomer({
+          name: name,
+          email: email,
+          phone: '+1 (555) 000-0000',
+          contactPerson: 'Account Administrator',
+          address: 'Corporate Headquarters',
+          industry: 'Enterprise Software',
+          status: 'Active'
+        });
+        newCustomerId = newCust.id;
+      }
+
+      Store.setCurrentUser({
+        id: 'USR-' + String(Date.now()).slice(-3),
+        name: name,
+        email: email,
+        role: role,
+        customerId: newCustomerId
+      });
+
+      showToast(`Account successfully created for ${name}!`, 'success');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1000);
+    }
+
+    function handleForgotPassword(e) {
+      e.preventDefault();
+      const email = document.getElementById('resetEmail').value.trim();
+      showToast(`Password reset workflow initiated. Verification link sent to ${email}`, 'success');
+      setTimeout(() => {
+        switchAuthTab('login');
+      }, 1500);
+    }
+
+    function quickLoginAs(role) {
+      Store.switchRole(role);
+      const user = Store.getCurrentUser();
+      showToast(`Logged in as ${user.name} (${role})`, 'success');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 600);
+    }
+  </script>
+</body>
+</html>
