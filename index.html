@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SubFlow - Unified Subscription Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="sidebar-backdrop" onclick="App.closeMobileSidebar()"></div>
+
+  <div class="app-container">
+    
+    <!-- ========================================================= -->
+    <!-- 1. LEFT SIDEBAR NAVIGATION                                -->
+    <!-- ========================================================= -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo-icon">S</div>
+        <div class="brand-text">
+          <span class="brand-title">SubFlow</span>
+          <span class="brand-subtitle">Subscription OS</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Operations</div>
+        
+        <div class="nav-item active" data-view="dashboard" onclick="App.navigate('dashboard')">
+          <div class="nav-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h7v9H3V3zm11 0h7v5h-7V3zm0 9h7v9h-7v-9zM3 16h7v5H3v-5z"/></svg>
+          </div>
+          <span>Dashboard</span>
+        </div>
+
+        <div class="nav-item" data-view="products" onclick="App.navigate('products')">
+          <div class="nav-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <span>Products & Plans</span>
+        </div>
+
+        <div class="nav-item" data-view="customers" onclick="App.navigate('customers')">
+          <div class="nav-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <span>Customers</span>
+        </div>
+
+        <div class="nav-item" data-view="subscriptions" onclick="App.navigate('subscriptions')">
+          <div class="nav-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <span>Subscriptions</span>
+        </div>
+
+        <div class="nav-section-title">Billing & Finance</div>
+
+        <div class="nav-item" data-view="quotations" onclick="App.navigate('quotations')">
+          <div class="nav-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <span>Quotations</span>
+        </div>
+
+        <div class="nav-item" data-view="invoices" onclick="App.navigate('invoices')">
+          <div class="nav-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg>
+          </div>
+          <span>Invoices</span>
+        </div>
+
+        <div class="nav-item" data-view="payments" onclick="App.navigate('payments')">
+          <div class="nav-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <span>Payments</span>
+        </div>
+
+        <div class="nav-item" id="navItemDiscounts" data-view="discounts" onclick="App.navigate('discounts')">
+          <div class="nav-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+          </div>
+          <span>Discounts</span>
+          <span class="nav-badge">Admin</span>
+        </div>
+
+        <div class="nav-item" data-view="reports" onclick="App.navigate('reports')">
+          <div class="nav-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10m-6 10V4m-6 16v-6"/></svg>
+          </div>
+          <span>Reports</span>
+        </div>
+
+        <div class="nav-item" id="navItemPortal" data-view="portal" onclick="App.navigate('portal')">
+          <div class="nav-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+          </div>
+          <span>Customer Portal</span>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="role-badge-box">
+          <span style="color: var(--text-muted); font-size: 11.5px;">Current Role:</span>
+          <span id="currentRoleBadge" class="role-pill admin">ADMIN</span>
+        </div>
+        <button class="btn btn-sm btn-outline" style="width: 100%; margin-top: 10px; font-size: 11.5px;" onclick="App.resetDemoState()">
+          Reset Demo Data
+        </button>
+      </div>
+    </aside>
+
+    <!-- ========================================================= -->
+    <!-- 2. MAIN APPLICATION CONTENT WRAPPER                       -->
+    <!-- ========================================================= -->
+    <main class="main-wrapper">
+      
+      <!-- TOP NAVIGATION BAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle-btn" onclick="App.toggleMobileSidebar()">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+
+          <div class="global-search-box">
+            <span class="search-icon-fixed">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </span>
+            <input type="text" class="search-input" placeholder="Search customers, subscriptions, invoices..." onkeyup="if(event.key==='Enter') App.handleGlobalSearch(this.value)">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Role Switcher Pills (Hackathon Evaluator Showcase) -->
+          <div class="role-quick-switcher" title="Instantly switch role to evaluate RBAC">
+            <button class="role-switch-btn active" data-role="ADMIN" onclick="App.switchUserRole('ADMIN')">Admin</button>
+            <button class="role-switch-btn" data-role="STAFF" onclick="App.switchUserRole('STAFF')">Staff</button>
+            <button class="role-switch-btn" data-role="CUSTOMER" onclick="App.switchUserRole('CUSTOMER')">Customer</button>
+          </div>
+
+          <!-- Dark / Light Mode Toggle -->
+          <button id="themeToggleBtn" class="icon-action-btn" onclick="App.toggleTheme()" title="Toggle Dark/Light Mode">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          </button>
+
+          <!-- Notifications Tray -->
+          <div style="position: relative;">
+            <button id="notificationBtn" class="icon-action-btn" onclick="App.toggleNotificationTray()" title="Notifications">
+              <span class="notification-badge"></span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            </button>
+
+            <div id="notificationTray" class="dropdown-menu">
+              <div class="dropdown-header">
+                <span>Recent System Alerts</span>
+                <span style="font-size: 11px; color: var(--primary); cursor: pointer;" onclick="Store.resetToDemo(); App.renderRecentActivities();">Refresh</span>
+              </div>
+              <div class="notification-list">
+                <div class="notification-item">
+                  <strong>Invoice Overdue Notice</strong>
+                  <span>INV-2026-104 ($269.50) is past due date.</span>
+                  <span class="notification-time">10 mins ago</span>
+                </div>
+                <div class="notification-item">
+                  <strong>Payment Received</strong>
+                  <span>$920.70 processed for CloudScale Enterprise.</span>
+                  <span class="notification-time">35 mins ago</span>
+                </div>
+                <div class="notification-item">
+                  <strong>Subscription Auto-Renewed</strong>
+                  <span>SUB-2026-001 cycle extended successfully.</span>
+                  <span class="notification-time">2 hours ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Profile & Sign Out -->
+          <div class="user-profile-menu" onclick="window.location.href='login.html'" title="Click to view sign in / switch accounts">
+            <div id="currentUserAvatar" class="user-avatar-circle">A</div>
+            <div class="user-meta-text">
+              <span id="currentUserName" class="user-name-text">Administrator</span>
+              <span id="currentUserRole" class="user-role-text">System Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ========================================================= -->
+      <!-- 3. PAGE VIEWS                                             -->
+      <!-- ========================================================= -->
+      <div class="content-area">
+
+        <!-- VIEW A: DASHBOARD -->
+        <section id="view-dashboard" class="page-view active">
+          <div class="page-header">
+            <div class="page-header-left">
+              <h1>Subscription Intelligence Dashboard</h1>
+              <p>Real-time telemetry on revenue, customer subscriptions, and invoice health.</p>
+            </div>
+            <div class="page-header-actions">
+              <button class="btn btn-primary" onclick="App.openCreateSubscriptionModal()">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                <span>New Subscription</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Summary Metric Cards -->
+          <div class="stat-card-grid">
+            <div class="stat-card" style="--stat-accent: #7C3AED; cursor: pointer;" onclick="App.navigate('customers')">
+              <div class="stat-info">
+                <span class="stat-label">Total Customers</span>
+                <span id="statTotalCustomers" class="stat-value">5</span>
+                <span class="stat-subtext"><span class="stat-trend positive">↑ 12%</span> vs last month</span>
+              </div>
+              <div class="stat-icon-wrapper">👥</div>
+            </div>
+
+            <div class="stat-card" style="--stat-accent: #10B981; cursor: pointer;" onclick="App.navigate('subscriptions')">
+              <div class="stat-info">
+                <span class="stat-label">Active Subscriptions</span>
+                <span id="statActiveSubs" class="stat-value">2</span>
+                <span class="stat-subtext"><span class="stat-trend positive">98%</span> active retention</span>
+              </div>
+              <div class="stat-icon-wrapper" style="background-color: var(--accent-success-bg); color: var(--accent-success);">⚡</div>
+            </div>
+
+            <div class="stat-card" style="--stat-accent: #6366F1; cursor: pointer;" onclick="App.navigate('payments')">
+              <div class="stat-info">
+                <span class="stat-label">Revenue Received</span>
+                <span id="statRevenueReceived" class="stat-value">$2,999.70</span>
+                <span class="stat-subtext"><span class="stat-trend positive">↑ $1.2k</span> this quarter</span>
+              </div>
+              <div class="stat-icon-wrapper" style="background-color: var(--secondary-light); color: var(--secondary);">💰</div>
+            </div>
+
+            <div class="stat-card" style="--stat-accent: #F59E0B; cursor: pointer;" onclick="App.navigate('invoices')">
+              <div class="stat-info">
+                <span class="stat-label">Outstanding Invoices</span>
+                <span id="statOutstandingInvoices" class="stat-value">$1,190.20</span>
+                <span class="stat-subtext">2 invoices pending collection</span>
+              </div>
+              <div class="stat-icon-wrapper" style="background-color: var(--accent-warning-bg); color: var(--accent-warning);">⏳</div>
+            </div>
+
+            <div class="stat-card" style="--stat-accent: #EF4444; cursor: pointer;" onclick="App.navigate('invoices')">
+              <div class="stat-info">
+                <span class="stat-label">Overdue Invoices</span>
+                <span id="statOverdueInvoices" class="stat-value">$269.50</span>
+                <span class="stat-subtext"><span class="stat-trend negative">Requires Action</span></span>
+              </div>
+              <div class="stat-icon-wrapper" style="background-color: var(--accent-danger-bg); color: var(--accent-danger);">⚠️</div>
+            </div>
+          </div>
+
+          <!-- Charts Grid -->
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 28px;" class="dashboard-columns-grid">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Monthly Revenue Velocity</div>
+                  <div class="card-subtitle">Aggregated recurring and on-demand revenues</div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="dashboardRevenueChart"></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Subscription Status</div>
+                  <div class="card-subtitle">Portfolio distribution</div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="dashboardDonutChart"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Renewals & Activities Grid -->
+          <div style="display: grid; grid-template-columns: 2fr 1.2fr; gap: 24px;" class="dashboard-columns-grid">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Upcoming Subscription Renewals</div>
+                  <div class="card-subtitle">Active contracts scheduled for next billing cycle</div>
+                </div>
+              </div>
+              <div class="table-wrapper" style="border: none; border-radius: 0;">
+                <table class="subflow-table">
+                  <thead>
+                    <tr>
+                      <th>Sub ID</th>
+                      <th>Customer</th>
+                      <th>Plan</th>
+                      <th>Cycle</th>
+                      <th>Amount</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboardRenewalsTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Recent System Activity</div>
+                  <div class="card-subtitle">Live audit logs</div>
+                </div>
+              </div>
+              <div class="card-body" id="dashboardActivityList"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW B: PRODUCTS & PLANS -->
+        <section id="view-products" class="page-view">
+          <div class="page-header">
+            <div class="page-header-left">
+              <h1>Products & Subscription Plans</h1>
+              <p>Configure subscription plans, pricing tiers, billing intervals, and product variants.</p>
+            </div>
+            <div class="page-header-actions">
+              <button class="btn btn-outline-primary" onclick="App.openAddProductModal()">+ Add Product</button>
+              <button class="btn btn-primary" onclick="App.openAddPlanModal()">+ Create Plan</button>
+            </div>
+          </div>
+
+          <!-- Products Catalog -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Products Catalog</div>
+            </div>
+            <div class="table-wrapper" style="border: none; border-radius: 0;">
+              <table class="subflow-table">
+                <thead>
+                  <tr>
+                    <th>Product ID</th>
+                    <th>Product Details</th>
+                    <th>Type</th>
+                    <th>Selling Price</th>
+                    <th>Cost Base</th>
+                    <th>Variants</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="productsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Plans Catalog -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Subscription Plans (Tiers & Intervals)</div>
+            </div>
+            <div class="table-wrapper" style="border: none; border-radius: 0;">
+              <table class="subflow-table">
+                <thead>
+                  <tr>
+                    <th>Plan ID</th>
+                    <th>Plan Name & Product</th>
+                    <th>Price</th>
+                    <th>Billing Interval</th>
+                    <th>Min Qty</th>
+                    <th>Renewal Rule</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="plansTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW C: CUSTOMERS -->
+        <section id="view-customers" class="page-view">
+          <div class="page-header">
+            <div class="page-header-left">
+              <h1>Customers Directory</h1>
+              <p>Manage customer accounts, profile information, subscriptions, and invoice history.</p>
+            </div>
+            <div class="page-header-actions">
+              <button class="btn btn-primary" onclick="App.openAddCustomerModal()">+ Add Customer</button>
+            </div>
+          </div>
+
+          <div class="table-toolbar">
+            <div class="table-toolbar-left">
+              <div class="table-search-wrapper">
+                <span class="table-search-icon">🔍</span>
+                <input type="text" class="table-search-input" placeholder="Filter customers..." oninput="App.renderCustomers(this.value)">
+              </div>
+              <select class="table-filter-select" onchange="App.renderCustomers('', this.value)">
+                <option value="ALL">All Statuses</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="subflow-table">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Customer / Contact</th>
+                  <th>Email & Phone</th>
+                  <th>Industry</th>
+                  <th>Status</th>
+                  <th>Subscriptions</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="customersTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- VIEW D: SUBSCRIPTIONS -->
+        <section id="view-subscriptions" class="page-view">
+          <div class="page-header">
+            <div class="page-header-left">
+              <h1>Subscriptions Lifecycle</h1>
+              <p>Manage contract lifecycles: Draft → Quotation → Confirmed → Active → Closed.</p>
+            </div>
+            <div class="page-header-actions">
+              <button class="btn btn-primary" onclick="App.openCreateSubscriptionModal()">+ New Subscription</button>
+            </div>
+          </div>
+
+          <div class="table-toolbar">
+            <div class="table-toolbar-left">
+              <select class="table-filter-select" onchange="App.renderSubscriptions(this.value)">
+                <option value="ALL">All Statuses</option>
+                <option value="Active">Active Only</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Quotation">Quotation</option>
+                <option value="Draft">Draft</option>
+                <option value="Closed">Closed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="subflow-table">
+              <thead>
+                <tr>
+                  <th>Sub Number</th>
+                  <th>Customer</th>
+                  <th>Plan Tier</th>
+                  <th>Interval</th>
+                  <th>Seats</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="subscriptionsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- VIEW E: QUOTATIONS -->
+        <section id="view-quotations" class="page-view">
+          <div class="page-header">
+            <div class="page-header-left">
+              <h1>Customer Quotations & Proposals</h1>
+              <p>Build reusable commercial proposals with quantities, taxes, and automatic conversion.</p>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="subflow-table">
+              <thead>
+                <tr>
+                  <th>Quotation ID</th>
+                  <th>Customer</th>
+                  <th>Template / Proposal Title</th>
+                  <th>Valid Until</th>
+                  <th>Total Value</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="quotationsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- VIEW F: INVOICES -->
+        <section id="view-invoices" class="page-view">
+          <div class="page-header">
+            <div class="page-header-left">
+              <h1>Billing Invoices</h1>
+              <p>Monitor invoices, track balance dues, generate printable statements, and process payments.</p>
+            </div>
+          </div>
+
+          <div class="table-toolbar">
+            <div class="table-toolbar-left">
+              <select class="table-filter-select" onchange="App.renderInvoices(this.value)">
+                <option value="ALL">All Invoices</option>
+                <option value="Paid">Paid</option>
+                <option value="Confirmed">Confirmed (Outstanding)</option>
+                <option value="Overdue">Overdue</option>
+                <option value="Draft">Draft</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="subflow-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Customer</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Total Amount</th>
+                  <th>Balance Due</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="invoicesTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- VIEW G: PAYMENTS -->
+        <section id="view-payments" class="page-view">
+          <div class="page-header">
+            <div class="page-header-left">
+              <h1>Payment Transactions</h1>
+              <p>Reconcile incoming funds against open invoices across credit card, wire transfer, and PayPal.</p>
+            </div>
+            <div class="page-header-actions">
+              <button class="btn btn-primary" onclick="App.openRecordPaymentModal()">+ Record Payment</button>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="subflow-table">
+              <thead>
+                <tr>
+                  <th>Payment ID</th>
+                  <th>Invoice Ref</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Method</th>
+                  <th>Date</th>
+                  <th>Transaction Ref / Notes</th>
+                </tr>
+              </thead>
+              <tbody id="paymentsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- VIEW H: DISCOUNTS (ADMIN ONLY) -->
+        <section id="view-discounts" class="page-view">
+          <div class="page-header">
+            <div class="page-header-left">
+              <h1>Promotional Discount Engine</h1>
+              <p>Admin configuration for promotional coupons, percentage deductions, and usage limits.</p>
+            </div>
+            <div class="page-header-actions">
+              <button class="btn btn-primary" onclick="App.openAddDiscountModal()">+ Create Coupon</button>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="subflow-table">
+              <thead>
+                <tr>
+                  <th>Coupon Code</th>
+                  <th>Discount Value</th>
+                  <th>Min Threshold</th>
+                  <th>Validity Period</th>
+                  <th>Usage Counter</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="discountsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- VIEW I: REPORTS -->
+        <section id="view-reports" class="page-view">
+          <div class="page-header">
+            <div class="page-header-left">
+              <h1>Executive Financial Reports</h1>
+              <p>Audited performance, revenue collections, overdue analysis, and plan adoption trends.</p>
+            </div>
+          </div>
+
+          <div class="stat-card-grid">
+            <div class="stat-card">
+              <div class="stat-info">
+                <span class="stat-label">Total Cash Collected</span>
+                <span id="reportTotalRevenue" class="stat-value">$2,999.70</span>
+                <span class="stat-subtext"><span class="stat-trend positive">100% reconciled</span></span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-info">
+                <span class="stat-label">Total Outstanding</span>
+                <span id="reportOutstanding" class="stat-value">$1,190.20</span>
+                <span class="stat-subtext">Due within 30 days</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-info">
+                <span class="stat-label">Overdue Exposure</span>
+                <span id="reportOverdue" class="stat-value">$269.50</span>
+                <span class="stat-subtext"><span class="stat-trend negative">Requires dunning</span></span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-info">
+                <span class="stat-label">Active Subscriptions</span>
+                <span id="reportActiveSubs" class="stat-value">2</span>
+                <span class="stat-subtext">Across 5 enterprise accounts</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.6fr 1.2fr; gap: 24px;" class="dashboard-columns-grid">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Revenue Trajectory</div>
+              </div>
+              <div class="card-body">
+                <div id="reportsRevenueTrendChart"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Subscription Tier Distribution</div>
+              </div>
+              <div class="card-body">
+                <div id="reportsPlanBreakdownContainer"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW J: CUSTOMER PORTAL -->
+        <section id="view-portal" class="page-view">
+          <div class="page-header">
+            <div class="page-header-left">
+              <h1>Welcome to Your Customer Portal</h1>
+              <p>Account Overview for: <strong id="portalCustomerName">CloudScale Enterprise</strong> (<span id="portalCustomerEmail">customer@cloudscale.io</span>)</p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 14px;">My Active Subscriptions</h2>
+            <div id="portalSubscriptionsList"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">My Invoices & Statements</div>
+            </div>
+            <div class="table-wrapper" style="border: none; border-radius: 0;">
+              <table class="subflow-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Self-Service Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="portalInvoicesTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 4. MODALS & FORMS                                         -->
+  <!-- ========================================================= -->
+
+  <!-- MODAL: ADD / EDIT PRODUCT -->
+  <div id="modalProduct" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="productModalTitle" class="modal-title">Add New Product</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalProduct')">✕</button>
+      </div>
+      <form id="productForm" onsubmit="App.handleProductSubmit(event)">
+        <div class="modal-body">
+          <input type="hidden" id="productIdHidden">
+          <div class="form-group">
+            <label class="form-label">Product Name <span class="required-star">*</span></label>
+            <input type="text" id="productName" class="form-input" placeholder="e.g. Cloud Compute Cluster" required>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Type</label>
+              <select id="productType" class="form-select">
+                <option value="Service">Service</option>
+                <option value="Software">Software</option>
+                <option value="Hardware">Hardware</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Selling Price ($) <span class="required-star">*</span></label>
+              <input type="number" id="productPrice" class="form-input" step="0.01" min="0" placeholder="149.00" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cost ($)</label>
+            <input type="number" id="productCost" class="form-input" step="0.01" min="0" placeholder="45.00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Technical Notes / Specs</label>
+            <textarea id="productNotes" class="form-textarea" placeholder="Describe key attributes..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="App.closeModal('modalProduct')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: CREATE / EDIT PLAN -->
+  <div id="modalPlan" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="planModalTitle" class="modal-title">Create Subscription Plan</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalPlan')">✕</button>
+      </div>
+      <form id="planForm" onsubmit="App.handlePlanSubmit(event)">
+        <div class="modal-body">
+          <input type="hidden" id="planIdHidden">
+          <div class="form-group">
+            <label class="form-label">Select Base Product <span class="required-star">*</span></label>
+            <select id="planProductSelect" class="form-select" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Plan Name <span class="required-star">*</span></label>
+            <input type="text" id="planName" class="form-input" placeholder="e.g. Business Pro Annual" required>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Plan Price ($) <span class="required-star">*</span></label>
+              <input type="number" id="planPrice" class="form-input" step="0.01" min="0" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Billing Interval <span class="required-star">*</span></label>
+              <select id="planInterval" class="form-select">
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly" selected>Monthly</option>
+                <option value="Yearly">Yearly</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Minimum Quantity</label>
+              <input type="number" id="planMinQuantity" class="form-input" value="1" min="1">
+            </div>
+            <div class="form-group" style="justify-content: center;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-top: 24px;">
+                <input type="checkbox" id="planAutoRenew" checked style="width: 18px; height: 18px;">
+                <span class="font-medium">Enable Auto-Renewal</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="App.closeModal('modalPlan')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Plan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD / EDIT CUSTOMER -->
+  <div id="modalCustomer" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="customerModalTitle" class="modal-title">Add Customer Account</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalCustomer')">✕</button>
+      </div>
+      <form id="customerForm" onsubmit="App.handleCustomerSubmit(event)">
+        <div class="modal-body">
+          <input type="hidden" id="customerIdHidden">
+          <div class="form-group">
+            <label class="form-label">Customer / Company Name <span class="required-star">*</span></label>
+            <input type="text" id="custName" class="form-input" placeholder="e.g. Apex Technologies Inc" required>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Contact Person</label>
+              <input type="text" id="custContact" class="form-input" placeholder="Operations Manager">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address <span class="required-star">*</span></label>
+              <input type="email" id="custEmail" class="form-input" placeholder="finance@apextech.com" required>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" id="custPhone" class="form-input" placeholder="+1 (555) 000-0000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Industry</label>
+              <input type="text" id="custIndustry" class="form-input" placeholder="Information Technology">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Billing Address</label>
+            <input type="text" id="custAddress" class="form-input" placeholder="Street Address, City, State, ZIP">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Account Status</label>
+            <select id="custStatus" class="form-select">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="App.closeModal('modalCustomer')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Customer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: CUSTOMER DETAILS -->
+  <div id="modalCustomerDetails" class="modal-overlay">
+    <div class="modal-container large">
+      <div class="modal-header">
+        <h3 class="modal-title">Customer Account Profile</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalCustomerDetails')">✕</button>
+      </div>
+      <div class="modal-body" id="customerDetailsContent"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="App.closeModal('modalCustomerDetails')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CREATE SUBSCRIPTION -->
+  <div id="modalSubscription" class="modal-overlay">
+    <div class="modal-container large">
+      <div class="modal-header">
+        <h3 class="modal-title">Create New Subscription Contract</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalSubscription')">✕</button>
+      </div>
+      <form id="subscriptionForm" onsubmit="App.handleSubscriptionSubmit(event)">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Select Customer <span class="required-star">*</span></label>
+              <select id="subCustomerSelect" class="form-select" required></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subscription Plan <span class="required-star">*</span></label>
+              <select id="subPlanSelect" class="form-select" required onchange="App.updateSubModalPricing()"></select>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Initial Lifecycle Status</label>
+              <select id="subStatusSelect" class="form-select">
+                <option value="Draft">Draft (Preliminary)</option>
+                <option value="Quotation">Quotation (Client Review)</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Active" selected>Active (Immediate)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Billing Interval</label>
+              <input type="text" id="subInterval" class="form-input" readonly>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Seats / Quantity</label>
+              <input type="number" id="subQuantity" class="form-input" value="1" min="1" oninput="App.updateSubModalPricing()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Unit Price ($)</label>
+              <input type="text" id="subUnitPrice" class="form-input" readonly>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Payment Terms</label>
+              <select id="subPaymentTerms" class="form-select">
+                <option value="Immediate">Immediate Upon Receipt</option>
+                <option value="Net 7">Net 7 Days</option>
+                <option value="Net 15" selected>Net 15 Days</option>
+                <option value="Net 30">Net 30 Days</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tax (10%) ($)</label>
+              <input type="text" id="subTaxAmount" class="form-input" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total Contract Amount ($)</label>
+            <input type="text" id="subTotalAmount" class="form-input" style="font-size: 16px; font-weight: 700; color: var(--primary);" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subscription Contract Notes</label>
+            <textarea id="subNotes" class="form-textarea" placeholder="Internal instructions..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="App.closeModal('modalSubscription')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Subscription</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: RECORD PAYMENT -->
+  <div id="modalPayment" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Record Invoice Payment</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalPayment')">✕</button>
+      </div>
+      <form id="paymentForm" onsubmit="App.handlePaymentSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Select Unpaid Invoice <span class="required-star">*</span></label>
+            <select id="paymentInvoiceSelect" class="form-select" required onchange="App.updatePaymentAmountField()"></select>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Payment Amount ($) <span class="required-star">*</span></label>
+              <input type="number" id="paymentAmount" class="form-input" step="0.01" min="0.01" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Payment Method</label>
+              <select id="paymentMethod" class="form-select">
+                <option value="Credit Card">Credit Card</option>
+                <option value="Bank Transfer">Bank Wire Transfer</option>
+                <option value="PayPal">PayPal / Stripe</option>
+                <option value="Cash">Cash / Cheque</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Transaction Reference Number</label>
+            <input type="text" id="paymentRef" class="form-input" placeholder="e.g. TXN-10928472">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Payment Reconciliation Notes</label>
+            <textarea id="paymentNotes" class="form-textarea" placeholder="Audit memo..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="App.closeModal('modalPayment')">Cancel</button>
+          <button type="submit" class="btn btn-success">Record Payment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD DISCOUNT (ADMIN ONLY) -->
+  <div id="modalDiscount" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Promotional Discount Coupon</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalDiscount')">✕</button>
+      </div>
+      <form id="discountForm" onsubmit="App.handleDiscountSubmit(event)">
+        <div class="modal-body">
+          <input type="hidden" id="discountIdHidden">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Coupon Code <span class="required-star">*</span></label>
+              <input type="text" id="discountCode" class="form-input" placeholder="e.g. PROMO25" required style="text-transform: uppercase;">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Type</label>
+              <select id="discountType" class="form-select">
+                <option value="Percentage">Percentage (%)</option>
+                <option value="Fixed">Fixed Amount ($)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Discount Value <span class="required-star">*</span></label>
+              <input type="number" id="discountValue" class="form-input" step="0.01" min="0" placeholder="20" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Min Purchase ($)</label>
+              <input type="number" id="discountMinPurchase" class="form-input" step="0.01" min="0" placeholder="100.00">
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Max Usage Redemptions</label>
+              <input type="number" id="discountMaxUsage" class="form-input" value="100" min="1">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Expiration Date</label>
+              <input type="date" id="discountEndDate" class="form-input" value="2026-12-31">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Campaign Notes</label>
+            <textarea id="discountNotes" class="form-textarea" placeholder="Internal campaign details..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="App.closeModal('modalDiscount')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Coupon</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: PRINTABLE INVOICE -->
+  <div id="modalPrintableInvoice" class="modal-overlay">
+    <div class="modal-container large" style="max-width: 820px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Printable Invoice Document</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalPrintableInvoice')">✕</button>
+      </div>
+      <div class="modal-body" style="padding: 20px; background-color: var(--bg-subtle);">
+        <div id="invoicePrintContainer"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="App.closeModal('modalPrintableInvoice')">Close</button>
+        <button type="button" class="btn btn-primary" onclick="App.printCurrentInvoice()">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-8 0h8v4H8v-4z"/></svg>
+          <span>Print / Save PDF</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: MANAGE VARIANTS -->
+  <div id="modalVariants" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="variantModalTitle" class="modal-title">Manage Product Variants</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalVariants')">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="variantModalProdId">
+        <div id="variantListContainer" style="margin-bottom: 20px;"></div>
+        
+        <form onsubmit="App.handleAddVariant(event)" style="border-top: 1px solid var(--border-color); padding-top: 16px;">
+          <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Add New Variant</h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Variant Name</label>
+              <input type="text" id="newVariantName" class="form-input" placeholder="e.g. 16GB RAM + 1TB SSD" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Additional Surcharge ($)</label>
+              <input type="number" id="newVariantPrice" class="form-input" step="0.01" min="0" value="0" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-sm btn-primary" style="margin-top: 6px;">+ Add Variant</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="App.closeModal('modalVariants')">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: QUOTATION PREVIEW -->
+  <div id="modalQuotationPreview" class="modal-overlay">
+    <div class="modal-container large">
+      <div class="modal-header">
+        <h3 class="modal-title">Commercial Proposal & Quotation</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalQuotationPreview')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="quotationPreviewContent"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="App.closeModal('modalQuotationPreview')">Close</button>
+        <button type="button" id="btnConfirmQuoteFromModal" class="btn btn-success" style="display: none;">Accept & Convert to Subscription</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: EDIT SUBSCRIPTION -->
+  <div id="modalEditSubscription" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="editSubModalTitle" class="modal-title">Manage Subscription</h3>
+        <button class="modal-close-btn" onclick="App.closeModal('modalEditSubscription')">✕</button>
+      </div>
+      <form onsubmit="App.handleEditSubscriptionSubmit(event)">
+        <div class="modal-body">
+          <input type="hidden" id="editSubIdHidden">
+          <div class="form-group">
+            <label class="form-label">Lifecycle Status</label>
+            <select id="editSubStatusSelect" class="form-select">
+              <option value="Draft">Draft</option>
+              <option value="Quotation">Quotation</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Active">Active</option>
+              <option value="Closed">Closed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Seats / Quantity</label>
+            <input type="number" id="editSubQty" class="form-input" min="1" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Notes & Annotations</label>
+            <textarea id="editSubNotes" class="form-textarea"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="App.closeModal('modalEditSubscription')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Subscription</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- SCRIPTS -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
